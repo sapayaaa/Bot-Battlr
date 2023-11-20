@@ -1,21 +1,15 @@
-import React {useState, useEffect } from 'react' 
+import React from 'react';
+import BotCard from './BotCard';
+import '../App.css'
 
-const BotCollection =() => {
-  const [bots,setBots] =useState([]);
-
-  useEffect(() => {
-    fetchBots()
-    .then((data) => setBots(data))
-    .catch((error) => console.error(error));
-  }, []);
-
-  return (
-    <div className="BotCollection">
-      {bots.map((bot) =>(
-        <BotCard Key={bot.id} bot={bot}/>
-      ))}
-    </div>
-  );
+const BotCollection = ({ bots, enlistBot }) => {
+    return (
+        <div className="bot-collection">
+            {bots.map((bot) => (
+                <BotCard key={bot.id} bot={bot} onEnlist={() => enlistBot(bot)} />
+            ))}
+        </div>
+    );
 };
 
 export default BotCollection;
