@@ -14,31 +14,32 @@ class App extends React.Component {
 
   componentDidMount() {
     // Fetch bot data from the API endpoint
-    fetch('https://my-json-server.typicode.com/sapayaaa/challenge-bank/transactions')
-      .then(response => response.json())
-      .then(data => this.setState({ bots: data }));
+    fetch('https://bot-api-i4lw.onrender.com')
+      .then(Response => Response.json())
+      .then(data => this.setState({ bots: data }))
   }
 
   enlistBot = (bot) => {
     // Check if the bot is already enlisted in the army
-    if (!this.state.yourBotArmy.some(b => b.id === bot.id)) {
+    if (!this.state.yourBotArmy.some((b) => b.id === bot.id)) {
       this.setState({ yourBotArmy: [...this.state.yourBotArmy, bot] });
     }
   };
 
   releaseBot = (botId) => {
     // Remove the bot from the army
-    const updatedArmy = this.state.yourBotArmy.filter(bot => bot.id !== botId);
+    const updatedArmy = this.state.yourBotArmy.filter((bot) => bot.id !== botId);
     this.setState({ yourBotArmy: updatedArmy });
   };
 
-  dischargeBot = (botId) => {
+  dischargeBot = async (botId) => {
     // Delete the bot both from the backend and from the YourBotArmy on the frontend
-    fetch(`https://my-json-server.typicode.com/sapayaaa/challenge-bank/transactions${botId}`, { method: 'DELETE' })
-      .then(() => {
-        this.releaseBot(botId);
-      })
-      .catch(error => console.error('Error discharging bot:', error));
+    try {
+      await fetch(`https://bot-api-i4lw.onrender.com${botId}`, { method: 'DELETE' });
+      this.releaseBot(botId);
+    } catch (error) {
+      console.error('Error discharging bot:', error);
+    }
   };
 
   render() {
