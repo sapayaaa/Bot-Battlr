@@ -14,7 +14,7 @@ class App extends React.Component {
 
   componentDidMount() {
     // Fetch bot data from the API endpoint
-    fetch('https://bot-api-i4lw.onrender.com')
+    fetch('https://bot-api-i4lw.onrender.com/bots')
       .then(Response => Response.json())
       .then(data => this.setState({ bots: data }))
   }
@@ -35,7 +35,7 @@ class App extends React.Component {
   dischargeBot = async (botId) => {
     // Delete the bot both from the backend and from the YourBotArmy on the frontend
     try {
-      await fetch(`https://bot-api-i4lw.onrender.com${botId}`, { method: 'DELETE' });
+      await fetch(`https://bot-api-i4lw.onrender.com/bots${botId}`, { method: 'DELETE' });
       this.releaseBot(botId);
     } catch (error) {
       console.error('Error discharging bot:', error);
