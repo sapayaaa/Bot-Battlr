@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { deleteBot } from './api';
 import BotCard from './BotCard';
 
-const MyBotArmy = () => {
+const YourBotArmy = () => {
   const [yourBots, setYourBots] = useState([]);
 
   const handleDischargeBot = (botId) => {
@@ -14,7 +14,7 @@ const MyBotArmy = () => {
   };
 
   return (
-    <div className="MyBotArmy">
+    <div className="YourBotArmy">
       {yourBots.map((bot) => (
         <BotCard
           key={bot.id}
@@ -26,4 +26,4 @@ const MyBotArmy = () => {
   );
 };
 
-export default MyBotArmy;
+export default YourBotArmy;
